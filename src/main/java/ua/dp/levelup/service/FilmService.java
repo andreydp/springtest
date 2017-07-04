@@ -9,7 +9,6 @@ import java.util.List;
  */
 public interface FilmService
 {
-
     void createFilm(Film film);
 
     Film getFilmById(long filmId);

@@ -18,27 +18,27 @@ public class OrderServiceImpl implements OrderService {
     this.orderDao = orderDao;
   }
 
-  void createOrder(Order order){
+  public void createOrder(Order order){
       orderDao.createOrder(order);
   }
 
-  void createOrder(Order order, Ticket ticket){
+  public void createOrder(Order order, Ticket ticket){
       orderDao.createOrder(order, ticket);
   }
 
-  Order getOrderById(long orderId){
+  public Order getOrderById(long orderId){
       return orderDao.getOrderById(orderId);
   }
 
-  void removeOrderById(long orderId){
+  public void removeOrderById(long orderId){
       orderDao.removeOrderById(orderId);
   }
 
-  void addTicketsToOrderById(long orderId, Ticket... tickets){
+  public void addTicketsToOrderById(long orderId, Ticket... tickets){
       orderDao.addTicketsToOrderById(orderId, tickets);
   }
 
-  List<Order> getAllOrders(){
+  public List<Order> getAllOrders(){
       return orderDao.getAllOrders();
   }
 }

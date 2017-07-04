@@ -1,5 +1,7 @@
 package ua.dp.levelup.dao.impl;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
@@ -14,44 +16,50 @@ import java.util.List;
  */
 @Repository
 @Transactional
-public class TicketDaoImpl implements TicketDao {
+public class TicketDaoImpl implements TicketDao
+{
 
+    private Session session;
 
     @Autowired
     private HibernateTemplate template;
 
     @Override
-    public void createTicket(Ticket ticket) {
-        template.save(ticket);
-    }
-
-    @Override
-    public void createTicket(Ticket ticket, long orderId)
+    public void createTicket(Ticket ticket)
     {
-
+        template.save(ticket);
     }
 
     @Override
     public Ticket getTicketById(long ticketId)
     {
-        return null;
+        session = template.getSessionFactory().openSession();
+        Ticket ticket = template.get(Ticket.class, ticketId);
+        if (null != ticket)
+        {
+            return ticket;
+        } else
+            throw new RuntimeException("There is no such ticket! ticketId: " + ticketId);
     }
 
     @Override
     public void removeTicketById(long ticketId)
     {
-
-    }
-
-    @Override
-    public void addTicketsToOrderById(long ticketId, long orderId)
-    {
-
+        session = template.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        Ticket ticket = template.get(Ticket.class, ticketId);
+        if (null != ticket)
+        {
+            template.delete(ticket);
+        } else
+            throw new RuntimeException("There is no such ticket! TicketId: " + ticketId);
+        transaction.commit();
     }
 
     @Override
     public List<Ticket> getAllTickets()
     {
-        return null;
+        session = template.getSessionFactory().openSession();
+        return template.loadAll(Ticket.class);
     }
 }

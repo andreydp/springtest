@@ -1,13 +1,13 @@
-package ua.dp.levelup.dao;
+package ua.dp.levelup.service;
 
 import ua.dp.levelup.core.model.Ticket;
 
 import java.util.List;
 
 /**
- * @author Alexandr Shegeda on 23.06.17.
+ * Created by andreypo on 7/4/2017.
  */
-public interface TicketDao
+public interface TicketService
 {
     void createTicket(Ticket ticket);
 

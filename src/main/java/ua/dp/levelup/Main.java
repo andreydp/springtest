@@ -3,6 +3,7 @@ package ua.dp.levelup;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ua.dp.levelup.dao.FilmDao;
 import ua.dp.levelup.dao.OrderDao;
+import ua.dp.levelup.dao.TicketDao;
 
 /**
  * @author Alexandr Shegeda on 13.06.2017.
@@ -76,6 +77,7 @@ public class Main {
 
         OrderDao orderDao = context.getBean(OrderDao.class);
         FilmDao filmDao = context.getBean(FilmDao.class);
+        TicketDao ticketDao = context.getBean(TicketDao.class);
 //        TicketDao ticketDao = context.getBean(TicketDao.class);
 //
 //        Order order = new Order(70D, 10L);
@@ -94,6 +96,7 @@ public class Main {
 
         System.out.println(orderDao.getAllOrders());
         System.out.println(filmDao.getAllFilms());
+        System.out.println(ticketDao.getAllTickets());
 
 
         context.close();
